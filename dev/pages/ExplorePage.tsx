@@ -4,7 +4,6 @@ export const ExplorePage = ({
   searchQuery,
   setSearchQuery,
 }: PortalRouteParams<"explorePage">) => {
-  console.log({ searchQuery, setSearchQuery })
   return (
     <>
       Explore
