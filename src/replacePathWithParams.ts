@@ -1,10 +1,11 @@
+import { removeQueryParams } from "./removeQueryParams"
 import { Route } from "./types/Route"
 
 export const replacePathWithParams = (
   route: Route,
   params: Record<string, string>
 ) => {
-  return route.path
+  return removeQueryParams(route.path)
     .split("/")
     .map((segment) => decodeSegment(segment, params))
     .join("/")

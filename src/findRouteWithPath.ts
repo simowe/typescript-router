@@ -1,4 +1,5 @@
 import { zip } from "lodash-es"
+import { removeQueryParams } from "./removeQueryParams"
 import type { Route } from "./types/Route"
 import type { RouteConfig } from "./types/RouteConfig"
 
@@ -11,7 +12,7 @@ export const findRouteWithPath = (
 
 const isRouteMatch = (route: Route, activePath: string) => {
   const locationSplit = activePath.split("/")
-  const routeSplit = route.path.split("/")
+  const routeSplit = removeQueryParams(route.path).split("/")
 
   const segments = zip(locationSplit, routeSplit)
 

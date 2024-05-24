@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { useRouterContext } from "./RouterContext"
 import { findRouteWithName } from "./findRouteWithName"
 import { replacePathWithParams } from "./replacePathWithParams"
 import type { LinkParams } from "./types/LinkParams"
@@ -23,5 +24,18 @@ export const createLink =
     if (!route) throw new Error("Route doesn't exist")
 
     const path = replacePathWithParams(route, params)
-    return <a href={path}>{children}</a>
+    const context = useRouterContext()
+
+    return (
+      <a
+        href={path}
+        onClick={(e) => {
+          e.preventDefault()
+          window.history.pushState(null, "", path)
+          context.refresh()
+        }}
+      >
+        {children}
+      </a>
+    )
   }

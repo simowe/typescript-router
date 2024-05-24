@@ -5,9 +5,11 @@ export const ProductPage = ({
 }: PortalRouteParams<"productPage">) => {
   return (
     <>
-      <PortalLink to="productPage" productId={productId}>
-        product page id: {productId}
-      </PortalLink>
+      <strong>Product page</strong>
+      <br />
+      <strong>ID: {productId}</strong>
+      <br />
+      <PortalLink to="frontPage">front page</PortalLink>
     </>
   )
 }

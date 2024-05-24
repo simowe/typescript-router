@@ -7,8 +7,8 @@ export const ExplorePage = ({
   console.log({ searchQuery, setSearchQuery })
   return (
     <>
-      whhhahah
-      <PortalLink to="frontPage">explore page </PortalLink>
+      Explore
+      <PortalLink to="frontPage">front page </PortalLink>
     </>
   )
 }
