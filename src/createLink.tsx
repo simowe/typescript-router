@@ -16,7 +16,7 @@ type Props<R extends RouteConfig, N extends Name<R>, S extends boolean> = {
 } & (S extends true ? Partial<LinkRouteParams<R, N>> : LinkRouteParams<R, N>)
 
 export const createLink =
-  <R extends RouteConfig>(routeConfig: R) =>
+  <R extends RouteConfig>(getRouteConfig: () => R) =>
   <N extends Name<R>, S extends boolean = false>({
     to,
     children,
