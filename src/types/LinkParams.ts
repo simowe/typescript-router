@@ -1,5 +1,8 @@
 import type { PathParams } from "./PathParams"
+import { QueryParams } from "./QueryParams"
 
-export type LinkParams<T> = {
-  [key in PathParams<T>[number]]: string
+export type LinkParams<Path> = {
+  [key in PathParams<Path>[number]]: string
+} & {
+  [key in QueryParams<Path>[number]]?: string
 }

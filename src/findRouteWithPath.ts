@@ -2,7 +2,7 @@ import { zip } from "lodash-es"
 import type { Route } from "./types/Route"
 import type { RouteConfig } from "./types/RouteConfig"
 
-export const findActiveRoute = (
+export const findRouteWithPath = (
   routeConfig: RouteConfig,
   activePath: string
 ) => {

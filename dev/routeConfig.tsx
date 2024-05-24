@@ -28,8 +28,8 @@ export const routeConfig = {
 
     route({
       name: "explorePage",
-      path: "/explore/:key",
-      render: (params) => <ExplorePage {...params} key={params.key} />,
+      path: "/explore?:searchQuery",
+      render: (params) => <ExplorePage {...params} />,
     }),
   ],
 }
