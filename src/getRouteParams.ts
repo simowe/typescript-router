@@ -53,7 +53,7 @@ const getQueryParams = (route: Route, queryString: string) => {
     .filter(exists)
 
   return Object.fromEntries(
-    querySplit.map((key) => [key, searchParams.get(key)])
+    querySplit.map((key) => [key, searchParams.get(key) ?? undefined])
   )
 }
 
@@ -67,9 +67,13 @@ const getQueryParamSetters = (route: Route, refresh: () => void) => {
 
   return Object.fromEntries(
     querySplit.map((key) => {
-      const setValue = (value: string) => {
+      const setValue = (value: string | undefined) => {
         const url = new URL(window.location.href)
-        url.searchParams.set(key, value)
+        if (value === undefined) {
+          url.searchParams.delete(key)
+        } else {
+          url.searchParams.set(key, value)
+        }
 
         window.history.replaceState(null, "", url.toString())
 

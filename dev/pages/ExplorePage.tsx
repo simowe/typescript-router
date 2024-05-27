@@ -12,7 +12,7 @@ export const ExplorePage = ({
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.currentTarget.value)}
       />
-      <PortalLink to="frontPage">front page </PortalLink>
+      <PortalLink to="frontPage">front page</PortalLink>
     </>
   )
 }
