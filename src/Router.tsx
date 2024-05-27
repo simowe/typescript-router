@@ -22,8 +22,13 @@ export const Router = ({
 
 const Content = ({ routeConfig }: { routeConfig: RouteConfig }) => {
   const activePath = window.location.pathname
+  const queryString = window.location.search
   const route = findRouteWithPath(routeConfig, activePath)
-  if (route) return route.render(getRouteParams(route, activePath))
+
+  if (route) {
+    const params = getRouteParams({ route, activePath, queryString })
+    return route.render(params)
+  }
 
   return <div>404</div>
 }
