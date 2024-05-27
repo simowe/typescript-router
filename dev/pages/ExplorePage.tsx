@@ -7,6 +7,11 @@ export const ExplorePage = ({
   return (
     <>
       Explore
+      <input
+        placeholder="search"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.currentTarget.value)}
+      />
       <PortalLink to="frontPage">front page </PortalLink>
     </>
   )

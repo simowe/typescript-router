@@ -1,4 +1,10 @@
-import { useCallback, useMemo, useState, type ReactNode } from "react"
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react"
 import { routerContext } from "./RouterContext"
 import { findRouteWithPath } from "./findRouteWithPath"
 import { getRouteParams } from "./getRouteParams"
@@ -9,26 +15,45 @@ export const Router = ({
 }: {
   routeConfig: RouteConfig
 }): ReactNode => {
-  const [_, setState] = useState({})
-  const refresh = useCallback(() => setState({}), [])
+  const refresh = useRefresh()
   const contextValue = useMemo(() => ({ refresh }), [refresh])
+
+  useRefreshOnNavigation(refresh)
 
   return (
     <routerContext.Provider value={contextValue}>
-      <Content routeConfig={routeConfig} />
+      <Content routeConfig={routeConfig} refresh={refresh} />
     </routerContext.Provider>
   )
 }
 
-const Content = ({ routeConfig }: { routeConfig: RouteConfig }) => {
+const Content = ({
+  routeConfig,
+  refresh,
+}: {
+  routeConfig: RouteConfig
+  refresh: () => void
+}) => {
   const activePath = window.location.pathname
   const queryString = window.location.search
   const route = findRouteWithPath(routeConfig, activePath)
 
   if (route) {
-    const params = getRouteParams({ route, activePath, queryString })
+    const params = getRouteParams({ route, activePath, queryString, refresh })
     return route.render(params)
   }
 
   return <div>404</div>
+}
+
+const useRefresh = () => {
+  const [_, setState] = useState({})
+  return useCallback(() => setState({}), [])
+}
+
+const useRefreshOnNavigation = (refresh: () => void) => {
+  useEffect(() => {
+    window.addEventListener("popstate", refresh)
+    return () => window.addEventListener("popstate", refresh)
+  }, [])
 }

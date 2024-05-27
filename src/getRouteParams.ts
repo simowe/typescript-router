@@ -1,5 +1,6 @@
-import { zip } from "lodash-es"
+import { upperFirst, zip } from "lodash-es"
 import { keepQueryParams } from "./keepQueryParams"
+import { removeParamPrefix } from "./removeParamPrefix"
 import { removeQueryParams } from "./removeQueryParams"
 import type { Route } from "./types/Route"
 import type { ViewParams } from "./types/ViewParams"
@@ -9,15 +10,18 @@ export const getRouteParams = ({
   route,
   activePath,
   queryString,
+  refresh,
 }: {
   route: Route
   activePath: string
   queryString: string
+  refresh: () => void
 }): ViewParams<string> => {
   const pathParams = getPathParams(route, activePath)
   const queryParams = getQueryParams(route, queryString)
+  const queryParamSetters = getQueryParamSetters(route, refresh)
 
-  return { ...queryParams, ...pathParams }
+  return { ...queryParams, ...pathParams, ...queryParamSetters }
 }
 
 const getPathParams = (route: Route, activePath: string) => {
@@ -39,26 +43,40 @@ const getPathParams = (route: Route, activePath: string) => {
 }
 
 const getQueryParams = (route: Route, queryString: string) => {
-  const routeQuerySplit = keepQueryParams(queryString).split("&")
-  const querySplit = new Set(
-    keepQueryParams(route.path)
-      .split("&")
-      .map((key) => {
-        if (key.startsWith(":")) return removeParamPrefix(key)
-      })
-      .filter(exists)
-  )
+  const searchParams = new URLSearchParams(queryString)
+
+  const querySplit = keepQueryParams(route.path)
+    .split("&")
+    .map((key) => {
+      if (key.startsWith(":")) return removeParamPrefix(key)
+    })
+    .filter(exists)
 
   return Object.fromEntries(
-    routeQuerySplit
-      .map((segment) => {
-        const [key, value] = segment.split("=")
-        return [key, value]
-      })
-      .filter(([key]) => querySplit.has(key))
+    querySplit.map((key) => [key, searchParams.get(key)])
   )
 }
 
-const removeParamPrefix = (param: string) => {
-  return param.replace(/^:/, "")
+const getQueryParamSetters = (route: Route, refresh: () => void) => {
+  const querySplit = keepQueryParams(route.path)
+    .split("&")
+    .map((key) => {
+      if (key.startsWith(":")) return removeParamPrefix(key)
+    })
+    .filter(exists)
+
+  return Object.fromEntries(
+    querySplit.map((key) => {
+      const setValue = (value: string) => {
+        const url = new URL(window.location.href)
+        url.searchParams.set(key, value)
+
+        window.history.replaceState(null, "", url.toString())
+
+        refresh()
+      }
+
+      return [`set${upperFirst(key)}`, setValue]
+    })
+  )
 }

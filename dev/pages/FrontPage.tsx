@@ -9,7 +9,9 @@ export const FrontPage = ({}: PortalRouteParams<"frontPage">) => {
         product page
       </PortalLink>
       <br />
-      <PortalLink to="explorePage">explore page</PortalLink>
+      <PortalLink to="explorePage" searchQuery="What is happening?">
+        explore page
+      </PortalLink>
     </>
   )
 }
