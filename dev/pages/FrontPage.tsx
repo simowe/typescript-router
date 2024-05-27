@@ -12,6 +12,10 @@ export const FrontPage = ({}: PortalRouteParams<"frontPage">) => {
       <PortalLink to="explorePage" searchQuery="What is happening?">
         explore page
       </PortalLink>
+      <br />
+      <PortalLink to="productModal" productId="23">
+        Open product modal
+      </PortalLink>
     </>
   )
 }

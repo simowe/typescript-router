@@ -5,8 +5,11 @@ import { replacePathWithParams } from "./replacePathWithParams"
 import type { LinkParams } from "./types/LinkParams"
 import type { RouteConfig } from "./types/RouteConfig"
 
-type Name<R extends RouteConfig> = R["routes"][number]["name"]
-type Routes<R extends RouteConfig> = R["routes"][number]
+type Name<R extends RouteConfig> =
+  | R["routes"][number]["name"]
+  | R["modals"][number]["name"]
+
+type Routes<R extends RouteConfig> = R["routes"][number] | R["modals"][number]
 
 type LinkRouteParams<R extends RouteConfig, N extends Name<R>> = LinkParams<
   Extract<Routes<R>, { name: N }>["path"]

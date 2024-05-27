@@ -9,6 +9,7 @@ type routeConfig = {
     Route<"page3", "/">,
     Route<"page4", "/">
   ]
+  modals: []
 }
 
 type cases = [

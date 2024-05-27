@@ -1,7 +1,8 @@
 import { lazy } from "react"
-import { route } from "./lib"
+import { RouteConfig, route } from "./lib"
 import { ExplorePage } from "./pages/ExplorePage"
 import { FrontPage } from "./pages/FrontPage"
+import { ProductModal } from "./pages/ProductModal"
 import { ProductPage } from "./pages/ProductPage"
 
 const OtherPage = lazy(() => import("./pages/OtherPage"))
@@ -32,4 +33,11 @@ export const routeConfig = {
       render: (params) => <ExplorePage {...params} />,
     }),
   ],
-}
+  modals: [
+    route({
+      name: "productModal",
+      path: "?:productId",
+      render: (params) => <ProductModal {...params} />,
+    }),
+  ],
+} satisfies RouteConfig

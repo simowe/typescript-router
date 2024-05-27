@@ -21,7 +21,7 @@ type cases = [
       id: string
       id2: string
       param1: string
-      setParam1: (value: string) => void
+      setParam1: (value: string | undefined) => void
     }
   >,
 
@@ -31,11 +31,9 @@ type cases = [
       id: string
       id2: string
       param1: string
-      setParam1: (value: string) => void
+      setParam1: (value: string | undefined) => void
       param2: string
-      setParam2: (value: string) => void
+      setParam2: (value: string | undefined) => void
     }
   >
 ]
-
-type x = ViewParams<"/users/:id/:id2?:param1">

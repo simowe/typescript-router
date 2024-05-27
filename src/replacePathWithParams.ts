@@ -21,6 +21,7 @@ export const replacePathWithParams = (
       })
       .filter(exists)
       .map((key) => [key, params[key]])
+      .filter(([_, value]) => value)
   )
 
   const searchString = new URLSearchParams(querySplit).toString()

@@ -1,4 +1,5 @@
 import {
+  Fragment,
   useCallback,
   useEffect,
   useMemo,
@@ -22,8 +23,34 @@ export const Router = ({
 
   return (
     <routerContext.Provider value={contextValue}>
+      <Modals routeConfig={routeConfig} refresh={refresh} />
       <Content routeConfig={routeConfig} refresh={refresh} />
     </routerContext.Provider>
+  )
+}
+
+const Modals = ({
+  routeConfig,
+  refresh,
+}: {
+  routeConfig: RouteConfig
+  refresh: () => void
+}) => {
+  const activePath = window.location.pathname
+  const queryString = window.location.search
+
+  return (
+    <>
+      {routeConfig.modals.map((route, index) => {
+        const params = getRouteParams({
+          route,
+          activePath,
+          queryString,
+          refresh,
+        })
+        return <Fragment key={index}>{route.render(params)}</Fragment>
+      })}
+    </>
   )
 }
 
