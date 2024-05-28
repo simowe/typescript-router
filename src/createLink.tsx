@@ -1,15 +1,12 @@
 import type { ReactNode } from "react"
-import { useRouterContext } from "./RouterContext"
 import { findRouteWithName } from "./findRouteWithName"
+import { navigate } from "./navigate"
 import { replacePathWithParams } from "./replacePathWithParams"
 import type { LinkParams } from "./types/LinkParams"
 import type { RouteConfig } from "./types/RouteConfig"
+import { Routes } from "./types/Routes"
 
-type Name<R extends RouteConfig> =
-  | R["routes"][number]["name"]
-  | R["modals"][number]["name"]
-
-type Routes<R extends RouteConfig> = R["routes"][number] | R["modals"][number]
+type Name<R extends RouteConfig> = Routes<R>["name"]
 
 type LinkRouteParams<R extends RouteConfig, N extends Name<R>> = LinkParams<
   Extract<Routes<R>, { name: N }>["path"]
@@ -27,15 +24,13 @@ export const createLink =
     if (!route) throw new Error("Route doesn't exist")
 
     const path = replacePathWithParams(route, params)
-    const context = useRouterContext()
 
     return (
       <a
         href={path}
         onClick={(e) => {
           e.preventDefault()
-          window.history.pushState(null, "", path)
-          context.refresh()
+          navigate(path)
         }}
       >
         {children}

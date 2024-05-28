@@ -2,11 +2,9 @@ import {
   Fragment,
   useCallback,
   useEffect,
-  useMemo,
   useState,
   type ReactNode,
 } from "react"
-import { routerContext } from "./RouterContext"
 import { REFRESH_EVENT_NAME } from "./constants"
 import { findRouteWithPath } from "./findRouteWithPath"
 import { getRouteParams } from "./getRouteParams"
@@ -18,15 +16,14 @@ export const Router = ({
   routeConfig: RouteConfig
 }): ReactNode => {
   const refresh = useRefresh()
-  const contextValue = useMemo(() => ({ refresh }), [refresh])
 
   useRefreshOnEvents(refresh)
 
   return (
-    <routerContext.Provider value={contextValue}>
+    <>
       <Modals routeConfig={routeConfig} refresh={refresh} />
       <Content routeConfig={routeConfig} refresh={refresh} />
-    </routerContext.Provider>
+    </>
   )
 }
 

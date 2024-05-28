@@ -19,6 +19,3 @@ type cases = [
   Equal<QueryParams<"/users/:id?:param!">, []>,
   Equal<QueryParams<"/users/:id?:param!&:param2">, ["param2"]>
 ]
-
-type x =
-  QueryParams<"/users/:id/subpath/:id2?:param1&param2&:param3&:param4!&:param5">
