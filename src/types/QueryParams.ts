@@ -1,12 +1,19 @@
 export type QueryParams<
-  T,
-  P extends unknown[] = []
-> = T extends `${string}?${infer Rest}`
-  ? QueryParams<Rest, P>
-  : T extends `:${infer Param}&${infer Rest}`
-  ? QueryParams<Rest, [...P, Param]>
-  : T extends `:${infer Param}`
-  ? [...P, Param]
-  : T extends `${string}&${infer Rest}`
-  ? QueryParams<Rest, P>
+  Path,
+  Params extends unknown[] = []
+> = Path extends `${string}?${infer Rest}`
+  ? QueryParams<Rest, Params>
+  : Path extends `${infer Param}&${infer Rest}`
+  ? QueryParams<Rest, AddOptionalParam<Param, Params>>
+  : Path extends `${infer Param}`
+  ? AddOptionalParam<Param, Params>
+  : Params
+
+type AddOptionalParam<
+  Param,
+  P extends unknown[]
+> = Param extends `:${infer NamedParam}`
+  ? NamedParam extends `${string}!`
+    ? P
+    : [...P, NamedParam]
   : P
