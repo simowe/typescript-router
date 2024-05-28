@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react"
 import { routerContext } from "./RouterContext"
+import { REFRESH_EVENT_NAME } from "./constants"
 import { findRouteWithPath } from "./findRouteWithPath"
 import { getRouteParams } from "./getRouteParams"
 import type { RouteConfig } from "./types/RouteConfig"
@@ -19,7 +20,7 @@ export const Router = ({
   const refresh = useRefresh()
   const contextValue = useMemo(() => ({ refresh }), [refresh])
 
-  useRefreshOnNavigation(refresh)
+  useRefreshOnEvents(refresh)
 
   return (
     <routerContext.Provider value={contextValue}>
@@ -78,9 +79,14 @@ const useRefresh = () => {
   return useCallback(() => setState({}), [])
 }
 
-const useRefreshOnNavigation = (refresh: () => void) => {
+const useRefreshOnEvents = (refresh: () => void) => {
   useEffect(() => {
     window.addEventListener("popstate", refresh)
-    return () => window.addEventListener("popstate", refresh)
+    window.addEventListener(REFRESH_EVENT_NAME, refresh)
+
+    return () => {
+      window.removeEventListener("popstate", refresh)
+      window.removeEventListener(REFRESH_EVENT_NAME, refresh)
+    }
   }, [])
 }

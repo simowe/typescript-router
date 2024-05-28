@@ -36,7 +36,7 @@ export const routeConfig = {
   modals: [
     route({
       name: "productModal",
-      path: "?:productId",
+      path: "?:productId!",
       render: (params) => <ProductModal {...params} />,
     }),
   ],

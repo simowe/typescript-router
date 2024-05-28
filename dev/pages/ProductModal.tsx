@@ -1,3 +1,4 @@
+import { navigateBack } from "../lib"
 import { type PortalRouteParams } from "../router"
 
 export const ProductModal = ({
@@ -21,7 +22,7 @@ export const ProductModal = ({
           inset: "0px",
           background: "rgba(0,0,0,0.5)",
         }}
-        onClick={() => setProductId(undefined)}
+        onClick={() => navigateBack()}
       />
       <div
         style={{

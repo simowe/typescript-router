@@ -1,5 +1,6 @@
 export { Router } from "./Router"
 export { createLink } from "./createLink"
+export { navigateBack } from "./navigateBack"
 export { route } from "./route"
 export { type Route } from "./types/Route"
 export { type RouteConfig } from "./types/RouteConfig"

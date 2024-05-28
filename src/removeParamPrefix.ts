@@ -1,3 +1,3 @@
 export const removeParamPrefix = (param: string) => {
-  return param.replace(/^:/, "")
+  return param.replace(/^:/, "").replace(/!$/, "")
 }
