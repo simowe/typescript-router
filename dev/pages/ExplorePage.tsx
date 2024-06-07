@@ -1,9 +1,9 @@
-import { PortalLink, type PortalRouteParams } from "../router"
+import { Link, type RouteParams } from "../router"
 
 export const ExplorePage = ({
   searchQuery,
   setSearchQuery,
-}: PortalRouteParams<"explorePage">) => {
+}: RouteParams<"explorePage">) => {
   return (
     <>
       Explore
@@ -12,7 +12,7 @@ export const ExplorePage = ({
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.currentTarget.value)}
       />
-      <PortalLink to="frontPage">front page</PortalLink>
+      <Link to="frontPage">front page</Link>
     </>
   )
 }

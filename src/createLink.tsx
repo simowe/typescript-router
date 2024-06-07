@@ -3,23 +3,23 @@ import { findRouteWithName } from "./findRouteWithName"
 import { navigate } from "./navigate"
 import { replacePathWithParams } from "./replacePathWithParams"
 import type { LinkParams } from "./types/LinkParams"
+import { RouteByName } from "./types/RouteByName"
 import type { RouteConfig } from "./types/RouteConfig"
-import { Routes } from "./types/Routes"
+import { RouteName } from "./types/RouteName"
 
-type Name<R extends RouteConfig> = Routes<R>["name"]
+type LinkRouteParams<
+  R extends RouteConfig,
+  N extends RouteName<R>
+> = LinkParams<RouteByName<R, N>["path"]>
 
-type LinkRouteParams<R extends RouteConfig, N extends Name<R>> = LinkParams<
-  Extract<Routes<R>, { name: N }>["path"]
->
-
-type Props<R extends RouteConfig, N extends Name<R>> = {
+type Props<R extends RouteConfig, N extends RouteName<R>> = {
   to: N
   children: ReactNode
 } & LinkRouteParams<R, N>
 
 export const createLink =
   <R extends RouteConfig>(getRouteConfig: () => R) =>
-  <N extends Name<R>>({ to, children, ...params }: Props<R, N>) => {
+  <N extends RouteName<R>>({ to, children, ...params }: Props<R, N>) => {
     const route = findRouteWithName(getRouteConfig(), to)
     if (!route) throw new Error("Route doesn't exist")
 

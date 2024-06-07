@@ -9,7 +9,6 @@ type routeConfig = {
     Route<"page3", "/page/:param/:param2/subpath/:param3">,
     Route<"page4", "/page/:param/:param2/subpath/:param3">
   ]
-  modals: []
 }
 
 type cases = [

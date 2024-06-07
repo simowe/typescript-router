@@ -1,7 +1,13 @@
-import { createLink, type RouteName, type RouteParams } from "./lib"
+import {
+  createLink,
+  type RouteName,
+  type RouteParams as _RouteParams,
+} from "./lib"
 import { routeConfig } from "./routeConfig"
 
-export const PortalLink = createLink(() => routeConfig)
+export const Link = createLink(() => routeConfig)
 
-export type PortalRouteParams<N extends RouteName<typeof routeConfig>> =
-  RouteParams<typeof routeConfig, N>
+export type RouteParams<N extends RouteName<typeof routeConfig>> = _RouteParams<
+  typeof routeConfig,
+  N
+>

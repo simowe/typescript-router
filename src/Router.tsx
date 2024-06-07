@@ -1,10 +1,4 @@
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react"
+import { useCallback, useEffect, useState, type ReactNode } from "react"
 import { REFRESH_EVENT_NAME } from "./constants"
 import { findRouteWithPath } from "./findRouteWithPath"
 import { getRouteParams } from "./getRouteParams"
@@ -21,33 +15,7 @@ export const Router = ({
 
   return (
     <>
-      <Modals routeConfig={routeConfig} refresh={refresh} />
       <Content routeConfig={routeConfig} refresh={refresh} />
-    </>
-  )
-}
-
-const Modals = ({
-  routeConfig,
-  refresh,
-}: {
-  routeConfig: RouteConfig
-  refresh: () => void
-}) => {
-  const activePath = window.location.pathname
-  const queryString = window.location.search
-
-  return (
-    <>
-      {routeConfig.modals.map((route, index) => {
-        const params = getRouteParams({
-          route,
-          activePath,
-          queryString,
-          refresh,
-        })
-        return <Fragment key={index}>{route.render(params)}</Fragment>
-      })}
     </>
   )
 }

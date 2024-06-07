@@ -1,15 +1,13 @@
-import { PortalLink, type PortalRouteParams } from "../router"
+import { Link, type RouteParams } from "../router"
 
-export const ProductPage = ({
-  productId,
-}: PortalRouteParams<"productPage">) => {
+export const ProductPage = ({ productId }: RouteParams<"productPage">) => {
   return (
     <>
       <strong>Product page</strong>
       <br />
       <strong>ID: {productId}</strong>
       <br />
-      <PortalLink to="frontPage">front page</PortalLink>
+      <Link to="frontPage">front page</Link>
     </>
   )
 }
