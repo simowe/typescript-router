@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": [
     "app",
-    "router"
+    "libs/*"
   ],
   "scripts": {
     "tsc": "turbo run tsc"
