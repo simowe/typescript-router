@@ -1,6 +1,6 @@
 import type { RouteConfig } from "./RouteConfig"
-import { RouteName } from "./RouteName"
-import { Routes } from "./Routes"
+import type { RouteName } from "./RouteName"
+import type { Routes } from "./Routes"
 
 export type RouteByName<
   R extends RouteConfig,

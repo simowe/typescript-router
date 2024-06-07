@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { Router } from "../src"
+import { Router } from "../../router/src"
 import { routeConfig } from "./routeConfig"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

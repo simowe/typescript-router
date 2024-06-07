@@ -1,4 +1,4 @@
-import { QueryParams } from "./QueryParams"
+import type { QueryParams } from "./QueryParams"
 import type { Equal } from "./testUtils"
 
 type cases = [

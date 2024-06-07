@@ -1,4 +1,4 @@
-import { RequiredQueryParams } from "./RequiredQueryParams"
+import type { RequiredQueryParams } from "./RequiredQueryParams"
 import type { Equal } from "./testUtils"
 
 type cases = [

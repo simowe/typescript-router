@@ -1,4 +1,4 @@
-import { route } from "./lib"
+import { route } from "router"
 import { ExplorePage } from "./pages/ExplorePage"
 import { FrontPage } from "./pages/FrontPage"
 import { ProductPage } from "./pages/ProductPage"

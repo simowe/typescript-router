@@ -1,3 +1,3 @@
-import { RouteConfig } from "./RouteConfig"
+import type { RouteConfig } from "./RouteConfig"
 
 export type Routes<R extends RouteConfig> = R["routes"][number]

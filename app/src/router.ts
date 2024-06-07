@@ -2,7 +2,7 @@ import {
   createLink,
   type RouteName,
   type RouteParams as _RouteParams,
-} from "./lib"
+} from "router"
 import { routeConfig } from "./routeConfig"
 
 export const Link = createLink(() => routeConfig)

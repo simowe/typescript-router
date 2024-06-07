@@ -1,6 +1,6 @@
 import type { PathParams } from "./PathParams"
-import { QueryParams } from "./QueryParams"
-import { RequiredQueryParams } from "./RequiredQueryParams"
+import type { QueryParams } from "./QueryParams"
+import type { RequiredQueryParams } from "./RequiredQueryParams"
 
 export type ViewParams<Path> = {
   [key in PathParams<Path>[number]]: string

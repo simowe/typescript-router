@@ -3,9 +3,9 @@ import { findRouteWithName } from "./findRouteWithName"
 import { navigate } from "./navigate"
 import { replacePathWithParams } from "./replacePathWithParams"
 import type { LinkParams } from "./types/LinkParams"
-import { RouteByName } from "./types/RouteByName"
+import type { RouteByName } from "./types/RouteByName"
 import type { RouteConfig } from "./types/RouteConfig"
-import { RouteName } from "./types/RouteName"
+import type { RouteName } from "./types/RouteName"
 
 type LinkRouteParams<
   R extends RouteConfig,

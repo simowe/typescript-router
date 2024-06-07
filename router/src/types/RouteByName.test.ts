@@ -1,5 +1,5 @@
 import type { Route } from "./Route"
-import { RouteByName } from "./RouteByName"
+import type { RouteByName } from "./RouteByName"
 import type { Equal } from "./testUtils"
 
 type routeConfig = {

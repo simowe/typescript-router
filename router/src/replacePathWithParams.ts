@@ -1,7 +1,7 @@
 import { keepQueryParams } from "./keepQueryParams"
 import { removeParamPrefix } from "./removeParamPrefix"
 import { removeQueryParams } from "./removeQueryParams"
-import { Route } from "./types/Route"
+import type { Route } from "./types/Route"
 import { exists } from "./utils/exists"
 
 export const replacePathWithParams = (
