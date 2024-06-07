@@ -4,6 +4,10 @@
     "tsc": {
       "dependsOn": ["^tsc"],
       "outputs": []
+    },
+    "dev": {
+      "dependsOn": ["^dev"],
+      "outputs": []
     }
   }
 }
